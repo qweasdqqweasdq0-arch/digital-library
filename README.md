@@ -57,3 +57,8 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Configuration Management Update - v1.2-stable
+This version includes the final stable configurations for the Digital Library system, including:
+* Fixed Database Integrity Constraints (Rating vs Value fields).
+* Corrected Storage Symbolic Link for PDF access.
+* Finalized Star Rating system implementation.
