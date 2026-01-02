@@ -21,19 +21,12 @@ class Book extends Model
     public function favorites() { return $this->hasMany(Favorite::class); }
    
     
-    public function ratings()
-    {
+    public function ratings() {
         return $this->hasMany(Rating::class);
     }
     
-    public function averageRating()
-    {
-        // يحسب المتوسط من حقل rating، وإذا لم يجده يجرب حقل value
-        $avg = $this->ratings()->avg('rating');
-        if (!$avg) {
-            $avg = $this->ratings()->avg('value');
-        }
-        return $avg ?: 0;
+    public function averageRating() {
+        return $this->ratings()->avg('rating'); // أو 'value' حسب اسم الحقل عندك
     }
 }
 

@@ -117,12 +117,25 @@ public function index(Request $request)
 
     public function rate(Request $request, $id)
     {
-        $request->validate(['rating' => 'required|integer|between:1,5']);
-        Rating::updateOrCreate(
-            ['user_id' => auth()->id(), 'book_id' => $id],
-            ['rating' => $request->rating, 'value' => $request->rating]
+        // 1. التحقق من المدخلات
+        $request->validate([
+            'rating' => 'required|integer|between:1,5'
+        ]);
+    
+        // 2. تحديث تقييم المستخدم الحالي لهذا الكتاب إذا كان موجوداً، أو إنشاء واحد جديد
+        // الشرط الأول (المصفوفة الأولى) هو ما يبحث عنه النظام ليعرف هل هذا التقييم موجود مسبقاً أم لا
+        \App\Models\Rating::updateOrCreate(
+            [
+                'user_id' => auth()->id(), // يجب التأكد من أن المستخدم مسجل دخول
+                'book_id' => $id
+            ],
+            [
+                'rating' => $request->rating,
+                'value'  => $request->rating  // تأكد أن اسم الحقل في قاعدة البيانات هو value أو rating
+            ]
         );
-        return back();
+    
+        return back()->with('success', 'تم تقييم الكتاب بنجاح');
     }
 
     public function showFavorites()
