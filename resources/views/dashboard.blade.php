@@ -17,7 +17,41 @@
                 <a href="{{ route('books.create') }}" class="bg-blue-600 text-white px-5 py-2 rounded-xl font-bold shadow hover:bg-blue-700 transition">➕ إضافة كتاب</a>
             </div>
             @endrole
+            {{-- شريط البحث والفلترة المتقدمة --}}
+<div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 mb-8">
+    <form action="{{ route('dashboard') }}" method="GET" class="flex flex-col md:flex-row gap-4 items-end">
+        
+        <div class="flex-1 w-full text-right">
+            <label class="block text-sm font-bold text-gray-700 mb-2">ابحث عن كتاب</label>
+            <input type="text" name="search" value="{{ request('search') }}" 
+                   placeholder="اكتب عنوان الكتاب هنا..." 
+                   class="w-full border-gray-200 rounded-xl focus:ring-blue-500 focus:border-blue-500 shadow-sm">
+        </div>
 
+        <div class="w-full md:w-64 text-right">
+            <label class="block text-sm font-bold text-gray-700 mb-2">التصنيف</label>
+            <select name="category_id" class="w-full border-gray-200 rounded-xl focus:ring-blue-500 focus:border-blue-500 shadow-sm">
+                <option value="">كل الأقسام</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="flex gap-2 w-full md:w-auto">
+            <button type="submit" class="bg-blue-600 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-blue-700 transition shadow-md flex-1">
+                بحث
+            </button>
+            @if(request()->has('search') || request()->has('category_id'))
+                <a href="{{ route('dashboard') }}" class="bg-gray-100 text-gray-600 px-6 py-2.5 rounded-xl font-bold hover:bg-gray-200 transition text-center flex-1">
+                    إلغاء
+                </a>
+            @endif
+        </div>
+    </form>
+</div>
             {{-- شبكة عرض الكتب --}}
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 @forelse($books as $book)

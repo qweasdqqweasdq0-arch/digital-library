@@ -12,17 +12,32 @@ use Illuminate\Support\Facades\Storage;
 class BookController extends Controller
 {
     // عرض الكتب للجميع
-    public function index(Request $request)
-    {
-        $query = Book::with('category');
+    // استبدل دالة index القديمة بهذا الكود
+public function index(Request $request)
+{
+    // تحميل الكتب مع التصنيف الخاص بها
+    $query = Book::with('category');
 
-        if ($request->filled('search')) {
-            $query->where('title', 'like', '%' . $request->search . '%');
-        }
-
-        $books = $query->latest()->get();
-        return view('dashboard', compact('books'));
+    // 1. فلترة البحث (بالعنوان أو الوصف)
+    if ($request->filled('search')) {
+        $query->where(function($q) use ($request) {
+            $q->where('title', 'like', '%' . $request->search . '%')
+              ->orWhere('description', 'like', '%' . $request->search . '%');
+        });
     }
+
+    // 2. فلترة التصنيف (إذا تم اختياره)
+    if ($request->filled('category_id')) {
+        $query->where('category_id', $request->category_id);
+    }
+
+    $books = $query->latest()->get();
+    
+    // نحتاج جلب التصنيفات لعرضها في قائمة الاختيار (Dropdown)
+    $categories = Category::all();
+
+    return view('dashboard', compact('books', 'categories'));
+}
 
     // التقارير (محمية للأدمن فقط)
     public function reports()
