@@ -20,8 +20,9 @@
 
 ### 1. تحميل المشروع
 `bash
-git clone [https://github.com/qweasdqweasdq0-arch/library1.2.git](https://github.com/qweasdqweasdq0-arch/library1.2.git)
-cd library1.2
+git clone [https://github.com/qweasdqweasdq0-arch/library.git](https://github.com/qweasdqweasdq0-arch/library.git)
+cd  library-copy
+
 
 ### 2.تثبيت المكتبات البرمجية
 composer install
