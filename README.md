@@ -20,7 +20,7 @@
 
 ### 1. تحميل المشروع
 `bash
-git clone [https://github.com/qweasdqweasdq0-arch/library.git](https://github.com/qweasdqweasdq0-arch/library.git)
+git clone [https://github.com/qweasdqweasdq0-arch/ digital-library.git](https://github.com/qweasdqweasdq0-arch/digital-library.git)
 cd  library-copy
 
 
