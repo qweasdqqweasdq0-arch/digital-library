@@ -51,5 +51,6 @@ Route::get('/force-admin', function () {
     }
     return "لا يوجد مستخدمين.";
 });
-
+Route::post('/comments/{comment}/like', [App\Http\Controllers\CommentController::class, 'toggleLike'])->name('comments.like');
+Route::post('/books/{book}/comments', [App\Http\Controllers\CommentController::class, 'store'])->name('comments.store');
 require __DIR__.'/auth.php';

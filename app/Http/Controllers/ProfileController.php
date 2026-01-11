@@ -14,6 +14,19 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function store(Request $request, $bookId)
+{
+    $request->validate(['comment' => 'required|string|max:500']);
+
+    \App\Models\Comment::create([
+        'user_id' => auth()->id(),
+        'book_id' => $bookId,
+        'comment' => $request->comment,
+        'parent_id' => $request->parent_id, // سيخزن ID التعليق الأصلي إذا كان رداً
+    ]);
+
+    return back()->with('success', 'تم إضافة الرد بنجاح');
+}
     public function edit(Request $request): View
     {
         return view('profile.edit', [

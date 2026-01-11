@@ -20,8 +20,8 @@
 
 ### 1. تحميل المشروع
 `bash
-git clone [https://github.com/qweasdqweasdq0-arch/ digital-library.git](https://github.com/qweasdqweasdq0-arch/digital-library.git)
-cd  library-copy
+git clone [https://github.com/qweasdqqweasdq0-arch/digital-library](https://github.com/qweasdqqweasdq0-arch/digital-library)
+cd  digital-library
 
 
 ### 2.تثبيت المكتبات البرمجية

@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    protected $fillable = ['title', 'description', 'file_path', 'category_id'];
+   // أضف هذه الحقول فقط داخل المصفوفة الموجودة لديك
+protected $fillable = ['title', 'author', 'description', 'file_path', 'category_id', 'user_id'];
 
     // أضف هذه الدالة ليعرف النظام أن الكتاب ينتمي لتصنيف معين
     public function category()
@@ -27,6 +28,9 @@ class Book extends Model
     
     public function averageRating() {
         return $this->ratings()->avg('rating'); // أو 'value' حسب اسم الحقل عندك
+    }
+    public function comments() {
+        return $this->hasMany(Comment::class)->latest();
     }
 }
 

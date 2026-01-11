@@ -1,39 +1,51 @@
 <x-app-layout>
     <div class="py-12" dir="rtl">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white p-6 rounded-lg shadow-sm border text-right">
-                <h2 class="text-2xl font-bold mb-6">إضافة كتاب جديد</h2>
+        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 p-10 rounded-[2.5rem] shadow-xl border border-gray-100 dark:border-gray-700 text-right">
+                <div class="mb-8 border-b border-gray-50 dark:border-gray-700 pb-6">
+                    <h2 class="text-3xl font-black text-gray-800 dark:text-white">إضافة كتاب جديد 📚</h2>
+                    <p class="text-gray-400 mt-2 text-sm font-medium">املأ البيانات أدناه لرفع ملف الكتاب إلى المكتبة</p>
+                </div>
                 
-                <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
-                    <div class="mb-4">
-                        <label class="block mb-2 font-bold">عنوان الكتاب</label>
-                        <input type="text" name="title" class="w-full border-gray-300 rounded-md shadow-sm text-right" required>
-                    </div>
+                    <div>
+    <label class="block mb-2 font-black text-gray-700 dark:text-gray-300 text-sm">عنوان الكتاب</label>
+    <input type="text" name="title" class="w-full border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 dark:text-white rounded-2xl py-4 shadow-inner focus:ring-2 focus:ring-indigo-500 text-right font-medium" required>
+</div>
 
-                    <div class="mb-4">
-                        <label class="block mb-2 font-bold">تصنيف الكتاب</label>
-                        <select name="category_id" class="w-full border-gray-300 rounded-md shadow-sm text-right" required>
-                            <option value="">اختر التصنيف...</option>
+<div>
+    <label class="block mb-2 font-black text-gray-700 dark:text-gray-300 text-sm">اسم المؤلف</label>
+    <input type="text" name="author" placeholder="أدخل اسم الكاتب أو المؤلف..." class="w-full border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 dark:text-white rounded-2xl py-4 shadow-inner focus:ring-2 focus:ring-indigo-500 text-right font-medium" required>
+</div>
+
+                    <div>
+                        <label class="block mb-2 font-black text-gray-700 dark:text-gray-300 text-sm">تصنيف الكتاب</label>
+                        <select name="category_id" class="w-full border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 dark:text-white rounded-2xl py-4 shadow-inner focus:ring-2 focus:ring-indigo-500 text-right font-bold" required>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     
-                    <div class="mb-4">
-                        <label class="block mb-2 font-bold">وصف الكتاب</label>
-                        <textarea name="description" rows="4" class="w-full border-gray-300 rounded-md shadow-sm text-right" required></textarea>
+                    <div>
+                        <label class="block mb-2 font-black text-gray-700 dark:text-gray-300 text-sm">وصف مختصر</label>
+                        <textarea name="description" rows="4" class="w-full border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 dark:text-white rounded-2xl py-4 shadow-inner focus:ring-2 focus:ring-indigo-500 text-right font-medium" required></textarea>
                     </div>
 
-                    <div class="mb-4">
-                        <label class="block mb-2 font-bold">ملف الكتاب (PDF أو EPUB)</label>
-                        <input type="file" name="file" class="w-full border-gray-300 rounded-md shadow-sm" required>
+                    <div>
+                        <label class="block mb-2 font-black text-gray-700 dark:text-gray-300 text-sm">ملف الكتاب الرقمي (PDF)</label>
+                        <div class="relative border-2 border-dashed border-gray-100 dark:border-gray-600 rounded-[1.5rem] p-8 hover:bg-indigo-50 dark:hover:bg-gray-700 transition text-center group">
+                            <input type="file" name="file" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" required>
+                            <div class="text-gray-400 group-hover:text-indigo-600 transition">
+                                <span class="text-4xl block mb-2">📄</span>
+                                <p class="text-xs font-black uppercase">اضغط لرفع ملف PDF</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="flex justify-end gap-2">
-                        <a href="{{ route('dashboard') }}" class="bg-gray-500 text-white px-6 py-2 rounded shadow">إلغاء</a>
-                        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700">حفظ الكتاب</button>
+                    <div class="flex items-center justify-end gap-6 pt-8 border-t border-gray-50 dark:border-gray-700">
+                        <button type="submit" class="bg-indigo-600 text-white px-12 py-4 rounded-2xl font-black shadow-lg hover:bg-indigo-700 transition"> نشر الكتاب الآن </button>
                     </div>
                 </form>
             </div>
